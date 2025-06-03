@@ -1,0 +1,278 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Management - HOD Dashboard</title>
+    <link rel="stylesheet" href="faculty_hod.css">
+    <link rel="stylesheet" href="style_hod.css">
+    <!--<script src="faculty-hod-select.js" defer></script> -->
+   <!--- <script src="faculty-views.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>HOD Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="leave.html">Leave Management</a></li>
+                <li><a href="hod1.html" class="active">Faculty Management</a></li>
+                <li><a href="review_hod.html">Review Management</a></li>
+                <li><a href="announcements.html">Announcements</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Faculty Management - <span id="dept-name"></span> Department</h2>
+
+        <!-- Faculty Table -->
+        <!--<section id="faculty-table-section">
+            <h3>Faculty Members</h3>
+            <table border="1" id="faculty-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Designation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Faculty rows will be dynamically inserted here -->
+                <!--</tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Faculty Details Modal -->
+    <!--<div id="faculty-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="faculty-name"></h2>
+            <img id="faculty-profile-pic" src="" alt="Faculty Profile Picture" />
+            <p><strong>Role:</strong> <span id="faculty-role"></span></p>
+            <p><strong>Email:</strong> <span id="faculty-email"></span></p>
+            <p><strong>Phone:</strong> <span id="faculty-phone"></span></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 HOD Dashboard</p>
+    </footer>
+
+</body>
+<!--<script>
+// 1. Get HOD login info from localStorage (set after login)
+/*const hodData = JSON.parse(localStorage.getItem("hodInfo"));
+
+if (!hodData || !hodData.department) {
+    alert("Unauthorized access. Please log in as HOD.");
+    window.location.href = "login.html";
+}
+
+// 2. Show department name
+document.getElementById("dept-name").textContent = hodData.department;
+
+// 3. Fetch faculty for this department
+fetch(`http://localhost:5000/api/hod/faculty/${hodData.department}`)
+    .then(response => response.json())
+    .then(data => {
+        const tbody = document.querySelector("#faculty-table tbody");
+        tbody.innerHTML = "";
+
+        data.forEach(faculty => {
+            const row = `<tr>
+                <td>${faculty.name}</td>
+                <td>${faculty.email}</td>
+                <td>${faculty.designation}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    })
+    .catch(error => {
+        console.error("Error fetching faculty:", error);
+        alert("Could not load faculty list.");
+    });
+</script> 
+
+</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HOD Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #34495e;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome, HOD</h1>
+    <p>Department: <strong id="dept-name"></strong></p>
+  </header>
+
+  <div class="container">
+    <h2>Faculty Members in Your Department</h2>
+    <table id="faculty-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Designation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Faculty rows will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!--<script>
+    // Get token and user info
+    const userRole = localStorage.getItem("userRole");
+    const token = localStorage.getItem("authToken");
+
+    // Redirect if not HOD
+    if (userRole !== "hod" || !token) {
+      alert("Unauthorized access. Please login as HOD.");
+      window.location.href = "index1.html";
+    }
+
+    // Fetch HOD profile info
+    fetch("http://localhost:5000/api/hod/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(profile => {
+      const department = profile.department;
+      document.getElementById("dept-name").textContent = department;
+
+      // Fetch faculty of this department
+      return fetch(`http://localhost:5000/api/hod/faculty/${department}`);
+    })
+    .then(res => res.json())
+    .then(facultyList => {
+      const tbody = document.querySelector("#faculty-table tbody");
+      tbody.innerHTML = "";
+
+      facultyList.forEach(faculty => {
+        const row = `
+          <tr>
+            <td>${faculty.name}</td>
+            <td>${faculty.email}</td>
+            <td>${faculty.designation}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    })
+    .catch(error => {
+      console.error("Error loading faculty list:", error);
+      alert("Failed to load faculty data.");
+    });
+  </script> -->
+
+  <script>
+  const token = localStorage.getItem("authToken");
+  const userRole = localStorage.getItem("userRole");
+
+  if (userRole !== "hod" || !token) {
+    alert("Unauthorized access. Please login as HOD.");
+    window.location.href = "index1.html";
+  }
+
+  // Step 1: Get HOD's profile (including department)
+  fetch("http://localhost:5000/api/hod/profile", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then(res => res.json())
+  .then(profile => {
+    document.getElementById("dept-name").textContent = profile.department;
+
+    // Step 2: Get faculty list in the same department
+    return fetch(`http://localhost:5000/api/hod/faculty/${profile.department}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  })
+  .then(res => res.json())
+  .then(facultyList => {
+    const tbody = document.querySelector("#faculty-table tbody");
+    tbody.innerHTML = "";
+
+    if (!facultyList.length) {
+      tbody.innerHTML = "<tr><td colspan='3'>No faculty found</td></tr>";
+    }
+
+    facultyList.forEach(faculty => {
+      const row = `
+        <tr>
+          <td>${faculty.name}</td>
+          <td>${faculty.email}</td>
+          <td>${faculty.designation}</td>
+        </tr>
+      `;
+      tbody.innerHTML += row;
+    });
+  })
+  .catch(err => {
+    console.error("Error:", err);
+    alert("Failed to load faculty list.");
+  });
+</script>
+
+</body>
+</html> 
+
+
+

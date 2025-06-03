@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Faculty Data Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .hero-section {
+      background: url('./a690e320-0896-49f2-9ec0-fda290793518.png') no-repeat center center;
+      background-size: cover;
+      height: 100vh;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-overlay {
+      background: rgba(7, 7, 7, 0.6);
+      padding: 50px;
+      border-radius: 10px;
+    }
+
+    .navbar-brand img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .feature-section {
+      padding: 60px 20px;
+      background-color: #f9f9f9;
+    }
+
+    .feature-box {
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(68, 12, 200, 0.1);
+    }
+
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    body {
+      background-image: url('KMIT-image.png');
+      background-size: cover;
+      /* Cover the entire screen */
+      background-position: center;
+      /* Center the image */
+      background-repeat: no-repeat;
+      /* Prevent tiling */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <!-- You can replace the src below with your logo -->
+        <img src="kmit-logo-tr.png" alt="Logo">
+        FDMS
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-outline-light ms-2" href="index1.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay">
+      <h1 class="display-4 fw-bold">Faculty Information Portal</h1>
+      <p class="lead">Efficiently manage faculty records, departments, and more in one place.</p>
+      <a href="index1.html" class="btn btn-primary btn-lg mt-3">Go to Login</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="container text-center my-5 text-white">
+    <h2 class="mb-4">About the Project</h2>
+    <p>This Faculty Information Portal helps streamline the handling of personal, professional, and academic details of
+      faculty members across departments. It enables Admin, Faculty, and HOD to interact with the system securely based
+      on their roles.</p>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="feature-section">
+    <div class="container">
+      <h2 class="text-center mb-5">Key Features</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="feature-box">
+            <h5>Role-Based Login</h5>
+            <p>Secure login for Admin, Faculty, and HOD with personalized dashboards.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-box">
+            <h5>Faculty Records</h5>
+            <p>Add, view, and manage detailed records including qualifications, experience, and documents.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="feature-box">
+            <h5>Reports & Analytics</h5>
+            <p>Generate reports and insights department-wise, course-wise, and more.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Login Section -->
+  <!--<section id="loginSection" class="py-5 text-center">
+  <div class="container">
+    <h2>Select Login Type</h2>
+    <button class="btn btn-primary m-2" onclick="showLogin('Admin')">Admin</button>
+    <button class="btn btn-success m-2" onclick="showLogin('Faculty')">Faculty</button>
+    <button class="btn btn-warning m-2" onclick="showLogin('HOD')">HOD</button>
+
+    <div class="login-form mt-4" id="loginForm">
+      <h3 id="loginTitle"></h3>
+      <form onsubmit="loginUser(event)">
+        <input type="text" id="username" class="form-control mb-3" placeholder="Enter username" required>
+        <input type="password" id="password" class="form-control mb-3" placeholder="Enter password" required>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+      </form>
+      <br>
+      <span class="forgot-password" onclick="showResetModal()">Forgot Password?</span>
+    </div>
+  </div>
+</section>  -->
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-light text-center">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p class="mt-3">Need help? Contact us at <strong>support@fdms.com</strong></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">© 2025 Faculty Information Portal | Developed by You</p>
+  </footer>
+
+  <!-- Reset Password Modal -->
+  <!--<div id="resetModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="hideResetModal()">&times;</span>
+    <h3>Reset Password</h3>
+    <p>Enter your email or username</p>
+    <input type="text" id="resetInput" class="form-control mb-3" placeholder="Email or Username" required>
+    <button class="btn btn-primary w-100" onclick="sendResetLink()">Send Reset Link</button>
+  </div>
+</div>
+
+<script>
+  function showLogin(role) {
+    document.getElementById('loginTitle').innerText = role + ' Login';
+    document.getElementById('loginForm').style.display = 'block';
+  }
+
+  async function loginUser(event) {
+    event.preventDefault();
+    try {
+      const role = document.getElementById('loginTitle').innerText.replace(' Login', '');
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const response = await fetch('http://localhost:5000/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert('Login successful! Redirecting to ' + data.role + ' Dashboard.');
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('userRole', data.role);
+
+        if (data.role === 'Admin') {
+          window.location.href = 'admin_dashboard.html';
+        } else if (data.role === 'Faculty') {
+          window.location.href = 'faculty_dashboard.html';
+        } else if (data.role === 'HOD') {
+          window.location.href = 'hod_dashboard.html';
+        } else {
+          alert('Unknown role. Contact administrator.');
+        }
+      } else {
+        alert('Error: ' + data.message);
+      }
+    } catch (error) {
+      alert('Network error: Unable to connect to server.');
+    }
+  }
+
+  function showResetModal() {
+    document.getElementById('resetModal').style.display = 'block';
+  }
+
+  function hideResetModal() {
+    document.getElementById('resetModal').style.display = 'none';
+  }
+
+  async function sendResetLink() {
+    const input = document.getElementById("resetInput").value;
+
+    const response = await fetch("http://localhost:5000/auth/forgot-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ emailOrUsername: input })
+    });
+
+    const data = await response.json();
+    alert(data.message);
+  }
+</script>   -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

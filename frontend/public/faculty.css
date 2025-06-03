@@ -1,0 +1,420 @@
+/* General Body Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fc;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Corner Button */
+.corner-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 25px;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.corner-button:hover {
+  background-color: #0088cc;
+  transform: scale(1.1);
+}
+
+/* Details Form */
+.details-form {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 70%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 14px 25px;
+  font-size: 16px;
+  background-color: #e4e7ef;
+  border: 2px solid #e4e7ef;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.tab-button.active {
+  background-color: #00aaff;
+  color: white;
+  border-color: #00aaff;
+}
+
+.tab-button:hover {
+  background-color: #00aaff;
+  transform: translateY(-2px);
+  color: white;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+}
+
+.tab-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.tab-content label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.tab-content input, 
+.tab-content select, 
+.tab-content textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0 20px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.tab-content input:focus, 
+.tab-content select:focus {
+  border-color: #00aaff;
+  outline: none;
+}
+
+button {
+  padding: 12px 30px;
+  background-color: #00aaff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="button"]:hover, button[type="submit"]:hover {
+  background-color: #0088cc;
+  transform: scale(1.05);
+}
+
+button[type="button"] {
+  background-color: #f44336;
+  margin-left: 15px;
+}
+
+button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+/* Education Steps Styles */
+.steps-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #e4e7ef;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.step-circle.active {
+  background-color: #00aaff;
+  color: white;
+}
+
+.step-circle:hover {
+  transform: scale(1.1);
+  background-color: #00aaff;
+  color: white;
+}
+
+/* Form Buttons (Cancel and Submit) */
+.form-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+form .form-buttons button {
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #00aaff;
+  color: white;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form .form-buttons button[type="button"] {
+  background-color: #f44336;
+}
+
+form .form-buttons button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+form .form-buttons button[type="submit"]:hover {
+  background-color: #0088cc;
+}
+
+/* Input Fields & Labels */
+input[type="text"], input[type="email"], input[type="number"], input[type="file"], select {
+  font-size: 16px;
+}
+
+input[type="text"], input[type="email"], input[type="number"], select {
+  height: 45px;
+}
+
+input[type="file"] {
+  height: auto;
+}
+
+input[type="file"]:focus {
+  border-color: #00aaff;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
+}
+
+label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* File Upload Fields */
+input[type="file"] {
+  padding: 8px 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+input[type="file"]:hover {
+  border-color: #00aaff;
+}
+
+button[type="file"]:focus {
+  border-color: #00aaff;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
+}
+
+/* Fixing the display issues */
+.tab-content {
+  display: block;
+}
+
+.tab-content input,
+.tab-content select,
+.tab-content textarea {
+  display: block;
+}
+
+.step-circle {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.steps-wrapper {
+  justify-content: space-between;
+}
+
+input[type="number"], select, input[type="text"], input[type="file"], input[type="email"] {
+  display: block;
+}
+
+label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* Making sure every step content is shown */
+.education-section {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.education-section input, 
+.education-section select, 
+.education-section textarea {
+  width: 100%;
+}
+
+.step-circle.active {
+  background-color: #00aaff;
+  color: white;
+}
+
+/* Adjusting the size of input fields for better appearance */
+input[type="text"], input[type="email"], input[type="number"], select {
+  height: 45px;
+  font-size: 16px;
+}
+
+input[type="file"] {
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  height: auto;
+}
+
+
+
+
+.steps-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  position: relative;
+  counter-reset: step;
+}
+
+.step-circle {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  padding: 10px 5px;
+  color: #777;
+  font-weight: 500;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.step-circle::before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  background: #ccc;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.step-circle.active::before {
+  background: #007bff; /* Blue */
+}
+
+.step-circle.completed::before {
+  content: "✓";
+  background: #28a745; /* Green */
+}
+
+.step-circle.completed {
+  color: #28a745;
+}
+
+.step-circle.active {
+  color: #007bff;
+}
+.steps-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ccc;
+  z-index: 0;
+}
+
+.step-circle::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #28a745;
+  z-index: 1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.step-circle.completed::after {
+  transform: scaleX(1);
+}
+   
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  margin: 5px;
+  display: inline-block;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.step-circle.active {
+  background-color: #007bff; /* Blue for active */
+}
+
+.step-circle.completed {
+  background-color: #28a745; /* Green for completed */
+}

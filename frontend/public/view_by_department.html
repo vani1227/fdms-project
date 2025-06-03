@@ -1,0 +1,49 @@
+<h2>Select Department</h2>
+<select id="departmentSelect">
+  <option value="">--Select Department--</option>
+  <option value="Computer Science">Computer Science</option>
+  <option value="Electronics">Electronics</option>
+  <option value="Mechanical">Mechanical</option>
+  <!-- Add your departments here -->
+</select>
+
+<div id="facultyContainer"></div>
+
+<script>
+document.getElementById('departmentSelect').addEventListener('change', async function () {
+  const dept = this.value;
+  const container = document.getElementById('facultyContainer');
+  container.innerHTML = '';
+
+  if (!dept) return;
+
+  const res = await fetch(`/api/faculty-public/department/${dept}`);
+  const faculties = await res.json();
+
+  if (!faculties.length) {
+    container.innerHTML = '<p>No faculty found for this department.</p>';
+    return;
+  }
+
+  faculties.forEach(faculty => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <h3>${faculty.personal.name}</h3>
+      <p><strong>Designation:</strong> ${faculty.professional.designation}</p>
+      <p><strong>Experience:</strong></p>
+      <ul>
+        ${faculty.professional.experience?.map(exp =>
+          `<li>${exp.type}: ${exp.startDate?.substring(0, 10)} to ${exp.endDate?.substring(0, 10)} 
+           (${exp.years} years, ${exp.months} months)</li>`).join('') || ''}
+      </ul>
+      <p><strong>Education:</strong></p>
+      <ul>
+        ${faculty.education?.map(edu =>
+          `<li>${edu.level} - ${edu.institute} (${edu.year}) - ${edu.percentage}</li>`).join('') || ''}
+      </ul>
+      <hr />
+    `;
+    container.appendChild(div);
+  });
+});
+</script>

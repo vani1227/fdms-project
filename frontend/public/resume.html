@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty Resume</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f8f8f8;
+      color: #333;
+    }
+    .resume-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h2 {
+      text-align: center;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 18px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 4px;
+    }
+    .edit-button {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .edit-button a {
+      text-decoration: none;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+    }
+    .photo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .photo img {
+      border-radius: 50%;
+      max-width: 150px;
+      height: auto;
+    }
+  </style>
+</head>
+<body onload="loadResume()">
+  <div class="resume-container" id="resumeContainer">
+    <p>Loading resume...</p>
+  </div>
+
+  <script>
+    async function loadResume() {
+      const username = localStorage.getItem("loggedInUsername");
+      if (!username) {
+        document.getElementById("resumeContainer").innerHTML = "<p>No user logged in.</p>";
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:5000/api/faculty/resume/${username}`);
+        const data = await res.json();
+
+        if (!data.personal) {
+          document.getElementById("resumeContainer").innerHTML = "<p>No resume data found.</p>";
+          return;
+        }
+
+        document.getElementById("resumeContainer").innerHTML = `
+          <div class="photo">
+            ${data.personal.photo ? `<img src="${data.personal.photo}" alt="Profile Photo" />` : ""}
+          </div>
+          <h2>${data.personal.name}</h2>
+          <p><strong>Email:</strong> ${data.personal.email}</p>
+          <p><strong>Phone:</strong> ${data.personal.phone}</p>
+          
+          <div class="section">
+            <div class="section-title">Education</div>
+            ${data.education?.length ? data.education.map(e => `
+              <p><strong>${e.degree}</strong> from ${e.institution} (${e.year})</p>
+            `).join('') : "<p>No education details provided.</p>"}
+          </div>
+          
+          <div class="section">
+            <div class="section-title">Experience</div>
+            ${data.professional?.length ? data.professional.map(p => `
+              <p><strong>${p.role}</strong> at ${p.organization} (${p.duration})</p>
+            `).join('') : "<p>No professional details provided.</p>"}
+          </div>
+
+          <div class="edit-button">
+            <a href="faculty.html">Edit Resume</a>
+          </div>
+        `;
+      } catch (err) {
+        console.error("Error loading resume:", err);
+        document.getElementById("resumeContainer").innerHTML = "<p>Error loading resume. Please try again later.</p>";
+      }
+    }
+  </script>
+</body>
+</html>

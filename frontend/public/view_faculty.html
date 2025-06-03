@@ -1,0 +1,621 @@
+<!--<!DOCTYPE html>      // this is the original code
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Faculty</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #5cb85c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Faculty List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="facultyTableBody">
+            <!-- Faculty data will be populated here 
+             Edit Faculty Modal 
+<div id="editModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc;">
+    <h3>Edit Faculty</h3>
+    <input type="hidden" id="editFacultyId">
+    <label>Name:</label>
+    <input type="text" id="editName"><br><br>
+    <label>Department:</label>
+    <input type="text" id="editDepartment"><br><br>
+    <button onclick="updateFaculty()">Update</button>
+    <button onclick="closeEditModal()">Cancel</button>
+</div>
+
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchFacultyData() {
+            try {
+                const response = await fetch('http://localhost:5000/api/faculty');
+                const facultyData = await response.json();
+                const tableBody = document.getElementById('facultyTableBody');
+
+                facultyData.forEach(faculty => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${faculty.id}</td>
+                        <td>${faculty.name}</td>
+                        <td>${faculty.department}</td>
+                        <td>
+                            <button onclick="editFaculty(${faculty.id})">Edit</button>
+                            <button onclick="deleteFaculty(${faculty.id})">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching faculty data:', error);
+            }
+        }
+
+        function editFaculty(id) {
+            // Logic to edit faculty
+            alert('Edit faculty with ID: ' + id);
+        }
+
+        function deleteFaculty(id) {
+            // Logic to delete faculty
+            alert('Delete faculty with ID: ' + id);
+        }
+
+        // Fetch faculty data when the page loads
+        window.onload = fetchFacultyData;
+    </script>   
+
+
+    <script>
+        async function fetchFacultyData() {
+            try {
+                const response = await fetch('http://localhost:5000/api/faculty');
+                const facultyData = await response.json();
+                const tableBody = document.getElementById('facultyTableBody');
+    
+                tableBody.innerHTML = ''; // Clear existing rows
+    
+                facultyData.forEach(faculty => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${faculty._id}</td>
+                        <td>${faculty.name}</td>
+                        <td>${faculty.department}</td>
+                        <td>
+                            <button onclick="editFaculty('${faculty._id}')">Edit</button>
+                            <button onclick="deleteFaculty('${faculty._id}')">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching faculty data:', error);
+            }
+        }  */
+    
+       /* function editFaculty(id) {
+            alert('Edit faculty with ID: ' + id);
+        }  */ 
+
+
+        /*async function updateFaculty() {
+    const id = document.getElementById('editFacultyId').value;
+    const updatedName = document.getElementById('editName').value;
+    const updatedDepartment = document.getElementById('editDepartment').value;
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/faculty/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: updatedName, department: updatedDepartment })
+        });
+
+        if (response.ok) {
+            alert('Faculty updated successfully!');
+            document.getElementById('editModal').style.display = 'none';
+            fetchFacultyData(); // Refresh the table
+        } else {
+            alert('Error updating faculty.');
+        }
+    } catch (error) {
+        console.error('Error updating faculty:', error);
+    }
+}  
+
+
+        async function editFaculty(id) {
+    try {
+        const response = await fetch(`http://localhost:5000/api/faculty/${id}`);
+        const faculty = await response.json();
+
+        // Fill the form with existing data
+        document.getElementById('editFacultyId').value = faculty._id;
+        document.getElementById('editName').value = faculty.name;
+        document.getElementById('editDepartment').value = faculty.department;
+
+        // Show the modal
+        document.getElementById('editModal').style.display = 'block';
+    } catch (error) {
+        console.error('Error fetching faculty data for editing:', error);
+    }
+}
+
+    
+        function deleteFaculty(id) {
+            if (confirm('Are you sure you want to delete this faculty?')) {
+                fetch(`http://localhost:5000/api/faculty/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Faculty deleted successfully!');
+                    fetchFacultyData(); // Refresh the table
+                })
+                .catch(error => console.error('Error deleting faculty:', error));
+            }
+        }   
+    
+        // Fetch faculty data when the page loads
+        //window.onload = fetchFacultyData;
+
+
+        /*function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+}  */
+
+   </script>
+    
+</body>
+</html>       -->
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Faculty</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Faculty List</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Courses</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
+        <tbody id="facultyTableBody">  
+            <!-- Data will be populated here -
+        </tbody>
+    </table> 
+
+    <script> 
+        async function fetchFaculty() {
+            const response = await fetch("http://localhost:5000/api/faculty/all");
+            const data = await response.json();
+
+            const tableBody = document.getElementById("facultyTableBody");
+            tableBody.innerHTML = "";
+
+            data.forEach(faculty => {
+                const row = `<tr>
+                    <td>${faculty.name}</td>
+                    <td>${faculty.email}</td>
+                    <td>${faculty.department}</td>
+                    <td>${faculty.designation}</td>
+                    <td>${faculty.courses}</td>
+                    <td>${faculty.contact}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        fetchFaculty();
+    </script>
+</body>
+</html>  -->
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Faculty</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #1d3557;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #457b9d;
+    }
+  </style>
+</head>
+<body> 
+
+  <div class="container">
+    <h2>Faculty Search</h2>
+
+    <form id="searchForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter faculty name">
+
+      <label for="email">Email ID</label>
+      <input type="email" id="email" name="email" placeholder="Enter faculty email">
+
+      <label for="department">Department</label>
+      <select id="department" name="department">
+        <option value="">-- Select Department --</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Mechanical">Mechanical</option>  
+        <option value="Civil">Civil</option>
+      </select>
+
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </div>
+
+</body>
+</html>  -->
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Faculty Details</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Optional styling -
+</head>
+<body>
+  <h2>Faculty List</h2>
+  <div id="facultyContainer"></div>
+
+  <script>
+    async function loadFaculty() {
+      try {
+        const res = await fetch("http://127.0.0.1:5000/api/faculty/all");
+        const facultyList = await res.json();
+
+        const container = document.getElementById("facultyContainer");
+        container.innerHTML = facultyList.map(fac => `
+          <div class="faculty-card">
+            <h3>${fac.name}</h3>
+            <p><strong>Email:</strong> ${fac.email}</p>
+            <p><strong>Department:</strong> ${fac.department}</p>
+            <p><strong>Designation:</strong> ${fac.designation}</p>
+
+            <h4>Experience</h4>
+            <ul>
+              ${(fac.experienceDetails || []).map(exp => `
+                <li>${exp.type}: ${exp.start} - ${exp.end}</li>
+              `).join('')}
+            </ul>
+
+            <h4>Education</h4>
+            <ul>
+              ${(fac.educationDetails || []).map(edu => `
+                <li>${edu.degree} from ${edu.institution} (${edu.year})</li>
+              `).join('')}
+            </ul>
+
+            <h4>Photos</h4>
+            ${fac.profilePhoto ? `<img src="${fac.profilePhoto}" width="100">` : ''}
+            ${fac.aadhaarPhoto ? `<p>Aadhaar: <a href="${fac.aadhaarPhoto}" target="_blank">View</a></p>` : ''}
+            ${fac.panPhoto ? `<p>PAN: <a href="${fac.panPhoto}" target="_blank">View</a></p>` : ''}
+          </div>
+          <hr>
+        `).join('');
+      } catch (err) {
+        console.error("Error loading faculty:", err);
+        document.getElementById("facultyContainer").textContent = "Failed to load faculty data.";
+      }
+    }
+
+    loadFaculty();
+  </script>
+</body>
+</html>  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Faculty</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    /* Your existing CSS unchanged */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #1d3557;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .btn:hover {
+      background-color: #457b9d;
+    }
+
+    #exportBtn {
+      background-color: #28a745;
+    }
+
+    #exportBtn:hover {
+      background-color: #218838;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Faculty Search</h2>
+
+  <form id="searchForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter faculty name">
+
+    <label for="email">Email ID</label>
+    <input type="email" id="email" name="email" placeholder="Enter faculty email">
+
+    <label for="department">Department</label>
+    <select id="department" name="department">
+      <option value="">-- Select Department --</option>
+      <option value="CSE">CSE</option>
+      <option value="CSM">CSD</option>
+      <option value="CSD">IT</option>
+      <option value="IT">CSM</option>
+    </select>
+
+    <button type="submit" class="btn">Search</button>
+  </form>
+
+  <button class="btn" id="exportBtn">Export to Excel</button>
+
+  <table id="facultyTable" style="display: none;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+  let facultyData = [];
+
+  // Fetch faculty data on load
+  async function fetchFacultyData() {
+    try {
+      const response = await fetch("http://localhost:5000/api/faculty/all");
+      const data = await response.json();
+      facultyData = data.filter(item => item.detailsSubmitted); // Filter only submitted details
+      displayFacultyData(facultyData); // Initially show all
+    } catch (err) {
+      alert("Failed to fetch faculty data.");
+      console.error(err);
+    }
+  }
+
+  // Display the faculty data in the table
+  function displayFacultyData(data) {
+    const table = document.getElementById('facultyTable');
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+
+    if (data.length === 0) {
+      table.style.display = 'none';
+      return;
+    }
+
+    data.forEach(faculty => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${faculty.name}</td>
+        <td>${faculty.email}</td>
+        <td>${faculty.department}</td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    table.style.display = 'table';
+  }
+
+  // Handle the search form submission
+  document.getElementById('searchForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim().toLowerCase();
+    const email = document.getElementById('email').value.trim().toLowerCase();
+    const department = document.getElementById('department').value;
+
+    const filtered = facultyData.filter(faculty => {
+      return (!name || faculty.name.toLowerCase().includes(name)) &&
+             (!email || faculty.email.toLowerCase().includes(email)) &&
+             (!department || faculty.department === department);
+    });
+
+    displayFacultyData(filtered);
+  });
+
+  // Export filtered data to Excel
+  document.getElementById('exportBtn').addEventListener('click', function () {
+    const table = document.getElementById('facultyTable');
+    const rows = table.querySelectorAll('tbody tr');
+    if (rows.length === 0) {
+      alert("No data to export.");
+      return;
+    }
+
+    const exportData = Array.from(rows).map(row => {
+      const cells = row.querySelectorAll('td');
+      return {
+        name: cells[0].innerText,
+        email: cells[1].innerText,
+        department: cells[2].innerText
+      };
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "FilteredFaculty");
+    XLSX.writeFile(workbook, "filtered_faculty_data.xlsx");
+  });
+
+  // Fetch faculty data on page load
+  window.onload = fetchFacultyData;
+</script>
+
+</body>
+</html>
+

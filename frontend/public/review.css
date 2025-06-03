@@ -1,0 +1,125 @@
+/* Container and spacing */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  /* Card style sections */
+  .card {
+    background-color: #f9f9f9;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Headings */
+  .card h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  /* Form labels and inputs */
+  form label {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  form select,
+  form textarea {
+    width: 100%;
+    padding: 6px 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  
+  form textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  /* Submit Button */
+  form button {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  form button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Review Table */
+  #reviewTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  
+  #reviewTable thead {
+    background-color: #007B8A;
+    color: white;
+  }
+  
+  #reviewTable th,
+  #reviewTable td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  #reviewTable tbody tr:nth-child(odd) {
+    background-color: #f1f9fa;
+  }
+  
+  #reviewTable tbody tr:hover {
+    background-color: #e0f2f5;
+  }
+  /* Table Section */
+#existingReviews {
+    margin-top: 30px;
+  }
+  
+  /* Table Styling */
+  #existingReviewTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  #existingReviewTable thead {
+    background-color: #1976d2;
+    color: #fff;
+  }
+  
+  #existingReviewTable th,
+  #existingReviewTable td {
+    text-align: left;
+    padding: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  #existingReviewTable tr:hover {
+    background-color: #f0f8ff;
+  }
+  
+  #existingReviewTable td:last-child {
+    font-weight: bold;
+    color: #333;
+  }

@@ -1,0 +1,533 @@
+<!-- admin_dashboard/create_user.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Faculty/HOD</title>
+
+  <!--<style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content:center;
+      align-items: center;
+      height: 120vh;
+      margin: 0;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3ms ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+      color: blue;
+    }
+  </style>  -->
+
+  <!--<style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: hsl(0, 0%, 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 120vh;
+      margin: 0;
+    }
+  
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 600px;
+      max-width: 95%;
+    }
+  
+    h2 {
+      text-align:start;
+      color: #333;
+      margin-bottom: 100px;
+    }
+  
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+  
+    .form-group {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    label {
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 500;
+    }
+  
+    input,
+    select {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+  
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  
+    button:hover {
+      background-color: #0056b3;
+    }
+  
+    #result {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+      color: blue;
+    }
+  
+    .view-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>  -->
+
+  <!--<style>
+    body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f0f4f8, #e6ecf2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  margin: 0;
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+form {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #dcdfe6;
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #fff;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+a {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+#result {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: 600;
+  color: green;
+}
+
+  </style>  -->
+  
+  <style>
+    body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f0f4f8, #e6ecf2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 10px;
+  margin: 0;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+form {
+  background-color: #ffffff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px 30px;
+}
+
+.form-grid label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #34495e;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #fff;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+a {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#result {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: green;
+}
+</style>
+</head>
+
+<body>
+  <h2>Create User Account</h2>
+  <!--<form id="createUserForm">
+    <label>Username:</label>
+    <input type="text" id="username" required /><br><br>
+
+    <label>Password:</label>
+    <input type="password" id="password" required /><br><br>
+
+    <label>Email:</label>
+    <input type="text" id="email" required /><br><br>
+
+    <label>Department:</label>
+    <select id="department" required>
+      <option value="">Select Department</option>
+      <option value="CSE">CSE</option>
+      <option value="CSD">CSD</option>
+      <option value="IT">IT</option>
+      <option value="CSM">CSM</option>
+    </select><br><br>
+
+
+    <label>Role:</label>
+    <select id="role" required>
+      <option value="">Select Role</option>
+      <option value="faculty">Faculty</option>
+      <option value="hod">HOD</option>
+    </select><br><br>
+
+    <button type="submit">Create User</button>
+    <a href="view_users.html" style="display:inline-block; margin-top:20px;">View All Users</a>
+  </form> -->
+
+  <form id="createUserForm">
+    <div class="form-grid">
+      <div>
+        <label>Username:</label>
+        <input type="text" id="username" required />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" id="password" required />
+      </div>
+      <div>
+        <label>Email:</label>
+        <input type="email" id="email" required />
+      </div>
+      <div>
+        <label>Department:</label>
+        <select id="department" required>
+          <option value="">Select Department</option>
+          <option value="CSE">CSE</option>
+          <option value="CSD">CSD</option>
+          <option value="IT">IT</option>
+          <option value="CSM">CSM</option>
+        </select>
+      </div>
+      <div class="full-width">
+        <label>Role:</label>
+        <select id="role" required>
+          <option value="">Select Role</option>
+          <option value="faculty">Faculty</option>
+          <option value="hod">HOD</option>
+        </select>
+      </div>
+      <div class="full-width">
+        <button type="submit">Create User</button>
+      </div>
+      <div class="full-width">
+        <a href="view_users.html">View All Users</a>
+      </div>
+    </div>
+  </form>
+  
+
+  <p id="result"></p>
+
+
+  <script>
+    document.getElementById('createUserForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const email = document.getElementById('email').value;
+      const department = document.getElementById('department').value;
+      const role = document.getElementById('role').value;
+      const token = localStorage.getItem('token');
+      try {
+        const response = await fetch('http://localhost:5000/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // ✅ send token here
+          },
+          body: JSON.stringify({ username, password, email, department, role }),
+        });
+
+        const data = await response.json();
+        document.getElementById('result').innerText = data.message || 'User created.';
+      } catch (error) {
+        document.getElementById('result').innerText = 'Something went wrong!';
+        console.error(error);
+      }
+    }); 
+  </script>  
+
+</body>
+
+</html>
+
+
+  <!--<script>
+    async function fetchUsers() {
+      const token = localStorage.getItem('token');
+      try {
+        const response = await fetch('http://localhost:5000/auth/all-users', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const users = await response.json();
+        const tableBody = document.getElementById('userTableBody');
+        tableBody.innerHTML = ''; // clear existing rows
+
+        users.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.department}</td>
+            <td>${user.role}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      } catch (err) {
+        console.error('Error fetching users:', err);
+      }
+    }
+
+    // Initial fetch
+    fetchUsers();
+
+    // Re-fetch after new user is created
+    document.getElementById('createUserForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const email = document.getElementById('email').value;
+      const department = document.getElementById('department').value;
+      const role = document.getElementById('role').value;
+      const token = localStorage.getItem('token');
+
+      try {
+        const response = await fetch('http://localhost:5000/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({ username, password, email, department, role }),
+        });
+
+        const data = await response.json();
+        document.getElementById('result').innerText = data.message || 'User created.';
+        fetchUsers(); // refresh table after user is added
+      } catch (error) {
+        document.getElementById('result').innerText = 'Something went wrong!';
+        console.error(error);
+      }
+    });
+  </script>  -->
+

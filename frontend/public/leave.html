@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leave Management - HOD Dashboard</title>
+  <link rel="stylesheet" href="style_hod.css">
+  <link rel="stylesheet" href="leave.css">
+</head>
+<body>
+  <header>
+    <h1>HOD Dashboard</h1>
+    <nav>
+      <ul>
+        <li><a href="leave.html" class="active">Leave Management</a></li>
+        <li><a href="hod1.html">Faculty Management</a></li>
+        <li><a href="review_hod.html">Review Management</a></li>
+        <li><a href="announcements.html">Announcements</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Leave Management</h2>
+
+    <!-- HOD & Department Selection 
+    <div>
+    <label for="hod-department">Select HOD Department:</label>
+    <select id="hod-department" name="hod-department">
+        <option value="">-- Select Department --</option>
+        <option value="cs">CSE</option>
+        <option value="bio">IT</option>
+        <option value="phy">CSM</option>
+        <!-- Add more departments as needed
+    </select>
+</div> -->
+    <!-- Faculty List -->
+    <div id="facultySection">
+      <h3>Faculty Under Selected Department</h3>
+      <table id="facultyTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Faculty rows populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Leave Requests -->
+    <div id="leaveSection" style="display: none;">
+      <h3>Leave Requests for <span id="selectedFacultyName"></span></h3>
+      <table id="leaveTable">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Leave requests populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!--<footer>
+    <p>&copy; 2025 HOD Dashboard</p>
+  </footer>  -->
+
+  <!-- JavaScript Logic -->
+  <script src="leave-hod-select.js"></script>
+  <script src="leave-view.js"></script>
+</body>
+</html>
+

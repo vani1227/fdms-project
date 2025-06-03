@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Details Form</title>
+  <link rel="stylesheet" href="faculty_faculty.css" />
+</head>
+
+<body>
+  <button id="fillButton" class="corner-button" onclick="showForm()">Fill the Details</button>
+  <div id="detailsForm" class="details-form" style="display: none;">
+    <div class="tabs">
+      <button class="tab-button" onclick="openTab(event, 'personal')">Personal Details</button>
+      <button class="tab-button" onclick="openTab(event, 'professional')">Professional Details</button>
+      <button class="tab-button" onclick="openTab(event, 'education')">Education Details</button>
+    </div>
+
+    <!--form id="facultyForm" action="/submit-form" method="POST" enctype="multipart/form-data" -->
+    <form action="http://localhost:5000/api/faculty/submit-education" method="POST" enctype="multipart/form-data">
+
+      <!-- Personal Details -->
+      <div id="personal" class="tab-content" style="display: none;">
+        <h2>Personal Details</h2>
+        <label>Name: <input type="text" id="name" name="name" required /></label>
+        <label>Gender:
+          <select id="gender" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <label>Date of Birth: <input type="date" id="dob" name="dob" required onchange="calculateAge()" /></label>
+        <label>Age: <input type="number" id="age" name="age" required /></label>
+        <label>Email: <input type="email" id="email" name="email" required /></label>
+        <label>Phone: <input type="tel" id="phone" name="phone" required /></label>
+        <label>Alternate Number: <input type="tel" id="altPhone" name="altPhone" /></label>
+        <label>City: <input type="text" id="personal_city" name="personal_city" required /></label>
+        <label>State: <input type="text" id="personal_state" name="personal_state" required /></label>
+        <label>Aadhaar Number: <input type="text" id="aadhaar" name="aadhaar" required /></label>
+        <label>Upload Aadhaar Photo: <input type="file" id="aadhaarPhoto" name="aadhaarPhoto"
+            accept=".jpg, .jpeg, .png" /></label>
+        <label>PAN Card: <input type="text" id="pan" name="pan" required /></label>
+        <label>Upload PAN Card Photo: <input type="file" id="panPhoto" name="panPhoto"
+            accept=".jpg, .jpeg, .png" /></label>
+        <label>Upload Profile Photo: <input type="file" id="profilePhoto" name="profilePhoto"
+            accept=".jpg, .jpeg, .png" /></label>
+      </div>
+
+      <!-- Professional Details -->
+      <div id="professional" class="tab-content">
+        <input type="hidden" name="totalExperienceIT" id="totalExperienceIT" />
+        <input type="hidden" name="totalExperienceTeaching" id="totalExperienceTeaching" />
+        <input type="hidden" name="totalExperienceOverall" id="totalExperienceOverall" />
+
+        <h2>Professional Details</h2>
+        <label>Designation: <input type="text" id="designation" name="designation" required /></label>
+
+        <div id="experienceSection">
+          <h3>Experience Details</h3>
+          <div id="experienceList"></div>
+          <button type="button" onclick="storeExperience(); addExperience();">Add Experience</button>
+        </div>
+        <h3>Experience Unit</h3>
+        <label>
+          Show in:
+          <select id="experienceUnit" name="experienceUnit" onchange="calculateTotalExperience()">
+            <option value="y">Years & Months</option>
+            <option value="md">Months & Days</option>
+            <option value="d">Total Days</option>
+          </select>
+        </label>
+
+        <h3>Total Experience</h3>
+        <label>IT Experience: <span id="itExperience" name="itExperience">0 Years 0 Months</span></label>
+        <label>Teaching Experience: <span id="teachingExperience" name="teachingExperience">0 Years 0
+            Months</span></label>
+        <label>Total Experience: <span id="totalExperience" name="totalExperience">0 Years 0 Months</span></label>
+
+
+        <!-- Research Contributions Section -->
+        <h5 class="mt-4">Research Contributions</h5>
+
+        <!-- Paper Presentations -->
+        <div id="paperPresentationsContainer" class="mb-3">
+          <label class="form-label">Paper Presentations</label>
+
+          <!-- Template row -->
+          <div class="paper-presentation-entry border rounded p-3 mb-3 position-relative">
+            <!--button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 remove-entry"
+              title="Remove">remove</button-->
+
+            <div class="row g-2">
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="paperPresentationTitle" placeholder="Title">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="conference" placeholder="Conference">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="location" placeholder="Location">
+              </div>
+              <div class="col-md-2">
+                <input type="date" class="form-control" name="presentationDate">
+              </div>
+              <div class="col-md-4 mt-2">
+                <input type="text" class="form-control" name="presentationRole" placeholder="Role (e.g., Presenter)">
+              </div>
+              <div class="col-md-8 mt-2">
+                <input type="file" class="form-control" name="presentationDocument">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add More Button --
+        <button type="button" class="btn btn-outline-primary" id="addPresentationBtn">
+          + Add Another Paper Presentation
+        </button-->
+
+
+        <!-- Paper Publications -->
+        <div id="paperPublicationsContainer" class="mb-3">
+          <label class="form-label">Paper Publications</label>
+          <div class="paper-publication-entry border rounded p-3 mb-3 position-relative">
+            <!--button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 remove-entry">remove</button-->
+            <div class="row g-2">
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="publicationTitle" placeholder="Title">
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" name="journal" placeholder="Journal">
+              </div>
+              <div class="col-md-2">
+                <input type="text" class="form-control" name="volume" placeholder="Volume">
+              </div>
+              <div class="col-md-2">
+                <input type="text" class="form-control" name="issue" placeholder="Issue">
+              </div>
+              <div class="col-md-3 mt-2">
+                <input type="text" class="form-control" name="doi" placeholder="DOI">
+              </div>
+              <div class="col-md-3 mt-2">
+                <input type="date" class="form-control" name="publicationDate">
+              </div>
+              <div class="col-md-6 mt-2">
+                <input type="file" class="form-control" name="publicationDocument">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--button type="button" class="btn btn-outline-primary mb-4" id="addPublicationBtn">+ Add Publication</button-->
+
+
+        <!-- Research Collaborations -->
+        <div class="mb-3">
+          <label class="form-label">Research Collaborations</label>
+          <div class="row g-2">
+            <div class="col-md-4"><input type="text" class="form-control" name="collabTitle" placeholder="Title"></div>
+            <div class="col-md-4"><input type="text" class="form-control" name="partnerInstitution"
+                placeholder="Partner Institution"></div>
+            <div class="col-md-2"><input type="text" class="form-control" name="collabType" placeholder="Type"></div>
+            <div class="col-md-2"><input type="text" class="form-control" name="collabDuration" placeholder="Duration">
+            </div>
+            <div class="col-md-12 mt-2"><input type="file" class="form-control" name="collabDocument"></div>
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- Professional Development Section -->
+        <h5 class="mt-4">Professional Development</h5>
+
+        <!-- Workshops -->
+        <div id="workshopsContainer" class="mb-3">
+          <label class="form-label">Workshops/FDPs Attended</label>
+          <div class="workshop-entry border rounded p-3 mb-3 position-relative">
+            <!--button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 remove-entry">remove</button-->
+            <div class="row g-2">
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="workshopTitle" placeholder="Title">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="workshopOrganization" placeholder="Organization">
+              </div>
+              <div class="col-md-2">
+                <input type="text" class="form-control" name="workshopDuration" placeholder="Duration">
+              </div>
+              <div class="col-md-2">
+                <select class="form-select" name="workshopMode">
+                  <option value="">Mode</option>
+                  <option>Online</option>
+                  <option>Offline</option>
+                </select>
+              </div>
+              <div class="col-md-4 mt-2">
+                <input type="date" class="form-control" name="workshopDate">
+              </div>
+              <div class="col-md-8 mt-2">
+                <input type="file" class="form-control" name="workshopCertificate">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--button type="button" class="btn btn-outline-primary mb-4" id="addWorkshopBtn">+ Add Workshop</button-->
+
+
+        <!-- Conferences -->
+        <div id="conferencesContainer" class="mb-3">
+          <label class="form-label">Conferences/Symposiums Attended</label>
+          <div class="conference-entry border rounded p-3 mb-3 position-relative">
+            <!--button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 remove-entry">remove</button-->
+            <div class="row g-2">
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="conferenceName" placeholder="Conference Name">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="conferenceOrganizer" placeholder="Organizer">
+              </div>
+              <div class="col-md-4">
+                <input type="date" class="form-control" name="conferenceDate">
+              </div>
+              <div class="col-md-6 mt-2">
+                <input type="text" class="form-control" name="conferenceLocation" placeholder="Location">
+              </div>
+              <div class="col-md-6 mt-2">
+                <input type="file" class="form-control" name="conferenceCertificate">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--button type="button" class="btn btn-outline-primary mb-4" id="addConferenceBtn">+ Add Conference</button-->
+
+
+        <!-- Events Organized -->
+        <div id="eventsOrganizedContainer" class="mb-3">
+          <label class="form-label">Events Organized</label>
+          <div class="event-entry border rounded p-3 mb-3 position-relative">
+            <!--button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2 remove-entry">remove</button-->
+            <div class="row g-2">
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="eventName" placeholder="Event Name">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="eventRole" placeholder="Role (Coordinator)">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="eventDepartment" placeholder="Department">
+              </div>
+              <div class="col-md-6 mt-2">
+                <input type="date" class="form-control" name="eventDate">
+              </div>
+              <div class="col-md-6 mt-2">
+                <input type="file" class="form-control" name="eventDocument">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--button type="button" class="btn btn-outline-primary mb-4" id="addEventBtn">+ Add Event</button-->
+
+
+        <hr>
+
+        <!-- Reporting Meta Section --
+  <h5 class="mt-4">Reporting Metadata</h5>
+  <!--div class="row g-2 mb-3">
+    <div class="col-md-3">
+      <label class="form-label">Last Report Generated</label>
+      <input type="date" class="form-control" name="lastReportGeneratedAt">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Available Report Formats</label>
+      <select class="form-select" name="reportFormatsAvailable" multiple>
+        <option value="PDF">PDF</option>
+        <option value="Excel">Excel</option>
+      </select>
+    </div>
+    <div class="col-md-12">
+      <label class="form-label">Notes</label>
+      <textarea class="form-control" name="reportNotes" rows="2" placeholder="Remarks for reporting..."></textarea>
+    </div>
+  </div-->
+      </div>
+
+
+      <!-- Education Details -->
+      <div id="education" class="tab-content" style="display: none;">
+        <!-- Step Arrows -->
+        <div class="steps-wrapper">
+          <div class="step-circle active" data-step="step1">Step 1</div>
+          <div class="step-circle" data-step="step2">Step 2</div>
+          <div class="step-circle" data-step="step3">Step 3</div>
+          <div class="step-circle" data-step="step4">Step 4</div>
+          <div class="step-circle" data-step="step5">Step 5</div>
+        </div>
+
+        <!-- Education Sections -->
+        <div id="educationFields">
+          <div class="education-section" id="step1">
+            <h3>SSC / CBSE</h3>
+            <label>School Name: <input type="text" id="school_name" name="school_name"></label>
+            <label>Board Name: <input type="text" id="school_board_name" name="school_board_name"></label>
+            <label>City: <input type="text" id="school_city" name="school_city"></label>
+            <label>State: <input type="text" id="school_state" name="school_state"></label>
+            <label>Year of Completion: <input type="number" id="school_yearOfCompletion"
+                name="school_yearOfCompletion"></label>
+            <label>Percentage: <input type="number" id="school_percentage" name="school_percentage" step="0.01"></label>
+            <label>Upload Certificate: <input type="file" id="school_uploadCertificate" name="school_uploadCertificate"
+                accept=".pdf,.jpg,.jpeg,.png"></label>
+            <button type="button" onclick="goToNextStep(2)">Next</button>
+          </div>
+
+          <div class="education-section" id="step2" style="display: none;">
+            <h3>Intermediate / Diploma</h3>
+            <label>Institution Name: <input type="text" id="institution_name" name="institution_name"></label>
+            <label>Board Name: <input type="text" id="institution_board_name" name="institution_board_name"></label>
+            <label>Specialization: <input type="text" id="institution_specialization"
+                name="institution_specialization"></label>
+            <label>City: <input type="text" id="institution_city" name="institution_city"></label>
+            <label>State: <input type="text" id="institution_state" name="institution_state"></label>
+            <label>Year of Completion: <input type="number" id="institution_yearOfCompletion"
+                name="institution_yearOfCompletion"></label>
+            <label>Percentage: <input type="number" id="institution_percentage" name="institution_percentage"
+                step="0.01"></label>
+            <label>Upload Certificate: <input type="file" id="institution_uploadCertificate"
+                name="institution_uploadCertificate" accept=".pdf,.jpg,.jpeg,.png"></label>
+            <button type="button" onclick="goToPreviousStep(1)">Back</button>
+            <button type="button" onclick="goToNextStep(3)">Next</button>
+          </div>
+
+          <div class="education-section" id="step3" style="display: none;">
+            <h3>Undergraduate (UG)</h3>
+            <label>Degree: <input type="text" id="ug_degree" name="ug_degree"></label>
+            <label>Board Name: <input type="text" id="ug_institution" name="ug_institution"></label>
+            <label>Specialization: <input type="text" id="ug_specialization" name="ug_specialization"></label>
+            <label>City: <input type="text" id="ug_city" name="ug_city"></label>
+            <label>State: <input type="text" id="ug_state" name="ug_state"></label>
+            <label>Year of Completion: <input type="number" id="ug_yearOfCompletion" name="ug_yearOfCompletion"></label>
+            <label>Percentage: <input type="number" id="ug_percentage" name="ug_percentage" step="0.01"></label>
+            <label>University: <input type="text" id="ug_university" name="ug_university"></label>
+            <label>Institution Type:
+              <select id="ug_institutionType" name="ug_institutionType">
+                <option value="">Select</option>
+                <option value="Govt">Government</option>
+                <option value="Private">Private</option>
+                <option value="Deemed">Deemed</option>
+              </select>
+            </label>
+            <label>Upload Certificate: <input type="file" id="ug_certificate" name="ug_certificate"
+                accept=".pdf,.jpg,.jpeg,.png"></label>
+            <button type="button" onclick="goToPreviousStep(1)">Back</button>
+            <button type="button" onclick="goToNextStep(4)">Next</button>
+          </div>
+
+          <div class="education-section" id="step4" style="display: none;">
+            <h3>Postgraduate (PG)</h3>
+            <label>Degree: <input type="text" id="pg_degree" name="pg_degree"></label>
+            <label>Specialization: <input type="text" id="pg_specialization" name="pg_specialization"></label>
+            <label>Board Name: <input type="text" id="pg_institution" name="pg_institution"></label>
+
+            <label>City: <input type="text" id="pg_city" name="pg_city"></label>
+            <label>State: <input type="text" id="pg_state" name="pg_state"></label>
+            <label>Year of Completion: <input type="number" id="pg_yearOfCompletion" name="pg_yearOfCompletion"></label>
+            <label>Percentage: <input type="number" id="pg_percentage" name="pg_percentage" step="0.01"></label>
+            <label>University: <input type="text" id="pg_university" name="pg_university"></label>
+            <label>Institution Type:
+              <select id="pg_institutionType" name="pg_institutionType">
+                <option value="">Select</option>
+                <option value="Govt">Government</option>
+                <option value="Private">Private</option>
+                <option value="Deemed">Deemed</option>
+              </select>
+            </label>
+            <label>Upload Certificate: <input type="file" id="pg_certificate" name="pg_certificate"
+                accept=".pdf,.jpg,.jpeg,.png"></label>
+            <button type="button" onclick="goToPreviousStep(1)">Back</button>
+            <button type="button" onclick="goToNextStep(5)">Next</button>
+          </div>
+
+          <div class="education-section" id="step5" style="display: none;">
+            <h3>PhD</h3>
+            <label>Have you completed PG?
+              <select onchange="togglePgInPhd(this.value)">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </label>
+            <div id="phdPgFields" style="display: none;">
+              <label>Degree: <input type="text" id="phd_degree" name="phd_degree"></label>
+              <label>Specialization: <input type="text" id="phd_specialization" name="phd_specialization"></label>
+              <label>Board Name: <input type="text" id="phd_institution" name="phd_institution"></label>
+
+              <label>City: <input type="text" id="phd_city" name="phd_city"></label>
+              <label>State: <input type="text" id="phd_state" name="phd_state"></label>
+              <label>Year of Completion: <input type="number" id="phd_yearOfCompletion"
+                  name="phd_yearOfCompletion"></label>
+              <label>Percentage: <input type="number" id="phd_percentage" name="phd_percentage" step="0.01"></label>
+              <label>University: <input type="text" id="phd_university" name="phd_university"></label>
+              <label>Institution Type:
+                <select id="phd_institutionType" name="phd_institutionType">
+                  <option value="">Select</option>
+                  <option value="Govt">Government</option>
+                  <option value="Private">Private</option>
+                  <option value="Deemed">Deemed</option>
+                </select>
+                <label>Upload Certificate: <input type="file" id="phd_certificate" name="phd_certificate"
+                    accept=".pdf,.jpg,.jpeg,.png"></label>
+            </div>
+            <button type="button" onclick="goToPreviousStep(1)">Back</button>
+            <button type="submit" id="submitButton">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="form-buttons" id="formButtons">
+        <button type="button" id="nextSaveButton" onclick="goToNextTab()">Save & Next</button>
+        <button type="button" onclick="hideForm()">Cancel</button>
+      </div>
+
+
+    </form>
+  </div>
+
+
+  <script src="script_faculty.js"></script>
+  <script>
+    function setupDynamicSection(containerId, addBtnId, entryClass) {
+      const container = document.getElementById(containerId);
+      const addBtn = document.getElementById(addBtnId);
+
+      addBtn.addEventListener('click', () => {
+        const template = container.querySelector(`.${entryClass}`);
+        const clone = template.cloneNode(true);
+        clone.querySelectorAll('input, select').forEach(input => input.value = '');
+        container.appendChild(clone);
+      });
+
+      container.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-entry')) {
+          const entries = container.querySelectorAll(`.${entryClass}`);
+          if (entries.length > 1) {
+            e.target.closest(`.${entryClass}`).remove();
+          } else {
+            alert("At least one entry is required.");
+          }
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupDynamicSection('paperPresentationsContainer', 'addPresentationBtn', 'paper-presentation-entry');
+      setupDynamicSection('paperPublicationsContainer', 'addPublicationBtn', 'paper-publication-entry');
+      setupDynamicSection('workshopsContainer', 'addWorkshopBtn', 'workshop-entry');
+      setupDynamicSection('conferencesContainer', 'addConferenceBtn', 'conference-entry');
+      setupDynamicSection('eventsOrganizedContainer', 'addEventBtn', 'event-entry');
+    });
+  </script>
+
+  <script>
+    const experienceData = [];
+
+    /*function calculateDuration(startDate, endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+      const years = Math.floor(totalMonths / 12);
+      const months = totalMonths % 12;
+      const days = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+      return { years, months, days };
+    }
+
+    function calculateTotalExperience() {
+      let itExp = { years: 0, months: 0, days: 0 };
+      let teachExp = { years: 0, months: 0, days: 0 };
+
+      experienceData.forEach(exp => {
+        const dur = calculateDuration(exp.startDate, exp.endDate);
+        if (exp.field.toLowerCase() === 'it') {
+          itExp.years += dur.years;
+          itExp.months += dur.months;
+          itExp.days += dur.days;
+        } else if (exp.field.toLowerCase() === 'teaching') {
+          teachExp.years += dur.years;
+          teachExp.months += dur.months;
+          teachExp.days += dur.days;
+        }
+      });
+
+      const total = {
+        years: itExp.years + teachExp.years,
+        months: itExp.months + teachExp.months,
+        days: itExp.days + teachExp.days,
+      };
+
+      itExp.years += Math.floor(itExp.months / 12);
+      itExp.months %= 12;
+
+      teachExp.years += Math.floor(teachExp.months / 12);
+      teachExp.months %= 12;
+
+      total.years += Math.floor(total.months / 12);
+      total.months %= 12;
+
+      // Update UI
+      document.getElementById('itExperience').innerText = `${itExp.years} Years ${itExp.months} Months`;
+      document.getElementById('teachingExperience').innerText = `${teachExp.years} Years ${teachExp.months} Months`;
+      document.getElementById('totalExperience').innerText = `${total.years} Years ${total.months} Months`;
+
+      // Hidden fields
+      /*document.getElementById('totalExperienceIT').value = `${itExp.years}.${itExp.months}`;
+      document.getElementById('totalExperienceTeaching').value = `${teachExp.years}.${teachExp.months}`;
+      document.getElementById('totalExperienceOverall').value = `${total.years}.${total.months}`; 
+
+      const itExpValue = parseFloat(`${itExp.years}.${itExp.months}`) || 0;
+      const teachExpValue = parseFloat(`${teachExp.years}.${teachExp.months}`) || 0;
+      const totalExpValue = parseFloat(`${total.years}.${total.months}`) || 0;
+
+      document.getElementById('totalExperienceIT').value = itExpValue;
+      document.getElementById('totalExperienceTeaching').value = teachExpValue;
+      document.getElementById('totalExperienceOverall').value = totalExpValue;
+
+    }*/
+
+
+    document.getElementById("facultyForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const form = this;
+      const formData = new FormData(form);
+
+      const experienceArray = [];
+      experienceData.length = 0; // Clear previous
+
+      document.querySelectorAll(".experience-row").forEach((row) => {
+        const type = row.querySelector("select[name='experienceType[]']").value;
+        const start = row.querySelector("input[name='experienceStart[]']").value;
+        const end = row.querySelector("input[name='experienceEnd[]']").value;
+        experienceArray.push({ type, start, end });
+
+        experienceData.push({
+          field: type,
+          startDate: start,
+          endDate: end
+        });
+      });
+
+      calculateTotalExperience();
+      formData.append('experience', JSON.stringify(experienceArray));
+
+
+      function calculateDuration(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const totalDays = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+        const totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+        const years = Math.floor(totalMonths / 12);
+        const months = totalMonths % 12;
+
+        return { years, months, totalDays };
+      }
+
+      function calculateTotalExperience() {
+        const mode = document.getElementById("experienceMode").value;
+
+        let itExp = { years: 0, months: 0, totalDays: 0 };
+        let teachExp = { years: 0, months: 0, totalDays: 0 };
+
+        experienceData.forEach(exp => {
+          const dur = calculateDuration(exp.startDate, exp.endDate);
+          if (exp.field.toLowerCase() === 'it') {
+            itExp.years += dur.years;
+            itExp.months += dur.months;
+            itExp.totalDays += dur.totalDays;
+          } else if (exp.field.toLowerCase() === 'teaching') {
+            teachExp.years += dur.years;
+            teachExp.months += dur.months;
+            teachExp.totalDays += dur.totalDays;
+          }
+        });
+
+        const total = {
+          years: itExp.years + teachExp.years,
+          months: itExp.months + teachExp.months,
+          totalDays: itExp.totalDays + teachExp.totalDays
+        };
+
+        // Normalize months to years if needed
+        itExp.years += Math.floor(itExp.months / 12);
+        itExp.months %= 12;
+
+        teachExp.years += Math.floor(teachExp.months / 12);
+        teachExp.months %= 12;
+
+        total.years += Math.floor(total.months / 12);
+        total.months %= 12;
+
+        // Update UI based on selected mode
+        if (mode === 'ym') {
+          document.getElementById('itExperience').innerText = `${itExp.years} Years ${itExp.months} Months`;
+          document.getElementById('teachingExperience').innerText = `${teachExp.years} Years ${teachExp.months} Months`;
+          document.getElementById('totalExperience').innerText = `${total.years} Years ${total.months} Months`;
+        } else if (mode === 'md') {
+          document.getElementById('itExperience').innerText = `${itExp.months + itExp.years * 12} Months (${itExp.totalDays} Days)`;
+          document.getElementById('teachingExperience').innerText = `${teachExp.months + teachExp.years * 12} Months (${teachExp.totalDays} Days)`;
+          document.getElementById('totalExperience').innerText = `${total.months + total.years * 12} Months (${total.totalDays} Days)`;
+        } else if (mode === 'd') {
+          document.getElementById('itExperience').innerText = `${itExp.totalDays} Days`;
+          document.getElementById('teachingExperience').innerText = `${teachExp.totalDays} Days`;
+          document.getElementById('totalExperience').innerText = `${total.totalDays} Days`;
+        }
+
+        // Update hidden fields with float-style representation (if needed for backend)
+        document.getElementById('totalExperienceIT').value = parseFloat(`${itExp.years}.${itExp.months}`) || 0;
+        document.getElementById('totalExperienceTeaching').value = parseFloat(`${teachExp.years}.${teachExp.months}`) || 0;
+        document.getElementById('totalExperienceOverall').value = parseFloat(`${total.years}.${total.months}`) || 0;
+      }
+
+
+      function addExperience() {
+        const field = document.getElementById("experienceField").value;
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+
+        if (!field || !startDate || !endDate) {
+          alert("Please fill in all experience fields.");
+          return;
+        }
+
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+    <td>${field}</td>
+    <td>${startDate}</td>
+    <td>${endDate}</td>
+    <td><button type="button" class="btn btn-danger btn-sm" onclick="removeExperience(this)">Remove</button></td>
+  `;
+
+        document.getElementById("experienceTable").appendChild(newRow);
+
+        experienceData.push({ field, startDate, endDate });
+        calculateTotalExperience();
+
+        // DO NOT reset inputs so user can add next experience
+        // If needed, you can optionally auto-fill the next experience field
+        // Example: auto-set next field to "Teaching" if last was "IT"
+      }
+
+
+
+      const educationArray = [];
+      const ssc = {
+        level: "SSC",
+        degree: document.getElementById("school_name")?.value,
+        institution: document.getElementById("school_board_name")?.value,
+        year: document.getElementById("school_yearOfCompletion")?.value,
+        percentage: document.getElementById("school_percentage")?.value,
+        certificateField: "school_uploadCertificate",
+      };
+      const schoolFile = document.getElementById("school_uploadCertificate")?.files[0];
+      if (schoolFile) formData.append("school_uploadCertificate", schoolFile);
+
+      const intermediate = {
+        level: "Intermediate",
+        degree: document.getElementById("institution_name")?.value,
+        specialization: document.getElementById("institution_specialization")?.value,
+        institution: document.getElementById("institution_board_name")?.value,
+        year: document.getElementById("institution_yearOfCompletion")?.value,
+        percentage: document.getElementById("institution_percentage")?.value,
+        certificateField: "intermediate_uploadCertificate",
+      };
+      const intermediateFile = document.getElementById("institution_uploadCertificate")?.files[0];
+      if (intermediateFile) formData.append("intermediate_uploadCertificate", intermediateFile);
+
+      const ug = {
+        level: "UG",
+        degree: document.getElementById("ug_degree")?.value,
+        specialization: document.getElementById("ug_specialization")?.value,
+        institution: document.getElementById("ug_university")?.value,
+        year: document.getElementById("ug_yearOfCompletion")?.value,
+        certificateField: "ug_certificate",
+      };
+      const ugFile = document.getElementById("ug_certificate")?.files[0];
+      if (ugFile) formData.append("ug_certificate", ugFile);
+
+      const pg = {
+        level: "PG",
+        degree: document.getElementById("pg_degree")?.value,
+        specialization: document.getElementById("pg_specialization")?.value,
+        institution: document.getElementById("pg_university")?.value,
+        year: document.getElementById("pg_yearOfCompletion")?.value,
+        certificateField: "pg_certificate",
+      };
+      const pgFile = document.getElementById("pg_certificate")?.files[0];
+      if (pgFile) formData.append("pg_certificate", pgFile);
+
+      const phdFieldsVisible = document.getElementById("phdPgFields")?.style.display !== "none";
+      let phd = null;
+      if (phdFieldsVisible) {
+        phd = {
+          level: "PhD",
+          degree: document.getElementById("phd_degree")?.value,
+          specialization: document.getElementById("phd_specialization")?.value,
+          institution: document.getElementById("phd_university")?.value,
+          year: document.getElementById("phd_yearOfCompletion")?.value,
+          certificateField: "phd_certificate",
+        };
+        const phdFile = document.getElementById("phd_certificate")?.files[0];
+        if (phdFile) formData.append("phd_certificate", phdFile);
+      }
+
+      [ssc, intermediate, ug, pg, phd].forEach((edu) => {
+        if (edu && edu.degree && edu.institution && edu.year) {
+          educationArray.push(edu);
+        }
+      });
+
+      formData.append("education", JSON.stringify(educationArray));
+
+      try {
+        const res = await fetch("http://127.0.0.1:5000/api/faculty/submit-education", {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await res.json();
+        if (res.ok && result.facultyId) {
+          alert(result.message || "Form submitted successfully!");
+          console.log("Redirecting now...");
+
+          //window.location.href = `/faculty/profile.html?id=${result.facultyId}`;
+          localStorage.setItem('facultyId', result.facultyId);
+          form.reset();
+          console.log("Redirecting to faculty_profile.html...");
+          window.location.href = 'faculty_profile.html';
+          console.log("This won't run if redirect works");
+          // window.location.href = `/faculty/profile/${result.facultyId}`; 
+
+        } else {
+          alert(result.message || "Submission failed.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Something went wrong during submission");
+      }
+    });
+
+
+  </script>
+
+</body>
+
+</html>

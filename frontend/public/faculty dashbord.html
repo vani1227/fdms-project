@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Details Form</title>
+  <link rel="stylesheet" href="faculty.css" />
+</head>
+<body>
+  <button id="fillButton" class="corner-button" onclick="showForm()">Fill the Details</button>
+  <div id="detailsForm" class="details-form" style="display: none;">
+    <div class="tabs">
+      <button class="tab-button" onclick="openTab(event, 'personal')">Personal Details</button>
+      <button class="tab-button" onclick="openTab(event, 'professional')">Professional Details</button>
+      <button class="tab-button" onclick="openTab(event, 'education')">Education Details</button>
+    </div>
+
+    <form id="facultyForm" onsubmit="submitForm(event)">
+
+
+      <!-- Personal Details -->
+      <div id="personal" class="tab-content" style="display: none;">
+        <h2>Personal Details</h2>
+        <label>Name: <input type="text" id="name" required /></label>
+        <label>Gender:
+          <select id="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <label>Date of Birth: <input type="date" id="dob" required onchange="calculateAge()" /></label>
+        <label>Age: <input type="number" id="age" required /></label>
+        <label>Email: <input type="email" id="email" required /></label>
+        <label>Phone: <input type="tel" id="phone" required /></label>
+        <label>Alternate Number: <input type="tel" id="altPhone" /></label>
+        <label>City: <input type="text" id="city" required /></label>
+        <label>State: <input type="text" id="state" required /></label>
+        <label>Aadhaar Number: <input type="text" id="aadhaar" required /></label>
+        <label>Upload Aadhaar Photo: <input type="file" id="aadhaarPhoto" accept=".jpg, .jpeg, .png" required /></label>
+        <label>PAN Card: <input type="text" id="pan" required /></label>
+        <label>Upload PAN Card Photo: <input type="file" id="panPhoto" accept=".jpg, .jpeg, .png" required /></label>
+        <label>Upload Profile Photo: <input type="file" id="profilePhoto" accept=".jpg, .jpeg, .png" required /></label>
+      </div>
+
+       <!-- Professional Details -->
+       <div id="professional" class="tab-content">
+        <h2>Professional Details</h2>
+        <label>Designation: <input type="text" id="designation" required /></label>
+
+        <div id="experienceSection">
+          <h3>Experience Details</h3>
+          <div id="experienceList"></div>
+          <button type="button" onclick="storeExperience(); addExperience();">Add Experience</button>
+        </div>
+        <h3>Experience Unit</h3>
+        <label>
+          Show in:
+          <select id="experienceUnit" onchange="calculateTotalExperience()">
+            <option value="ym">Years & Months</option>
+            <option value="md">Months & Days</option>
+            <option value="d">Total Days</option>
+          </select>
+        </label>
+
+        <h3>Total Experience</h3>
+        <label>IT Experience: <span id="itExperience">0 Years 0 Months</span></label>
+        <label>Teaching Experience: <span id="teachingExperience">0 Years 0 Months</span></label>
+        <label>Total Experience: <span id="totalExperience">0 Years 0 Months</span></label>
+      </div>
+
+
+
+
+      <!-- Education Details -->
+      <div id="education" class="tab-content" style="display: none;">
+        <!-- Step Arrows -->
+        <div class="steps-wrapper">
+          <div class="step-circle active" data-step="step1">Step 1</div>
+          <div class="step-circle" data-step="step2">Step 2</div>
+          <div class="step-circle" data-step="step3">Step 3</div>
+          <div class="step-circle" data-step="step4">Step 4</div>
+          <div class="step-circle" data-step="step5">Step 5</div>
+        </div>
+
+        <!-- Education Sections -->
+        <div id="educationFields">
+          <div class="education-section" id="step1">
+            <h3>SSC / CBSE</h3>
+            <label>School Name: <input type="text"></label>
+            <label>Board Name: <input type="text"></label>
+            <label>City: <input type="text"></label>
+            <label>State: <input type="text"></label>
+            <label>Year of Completion: <input type="number"></label>
+            <label>Percentage: <input type="number" step="0.01"></label>
+            <label>Upload Certificate: <input type="file" accept=".pdf,.jpg,.jpeg,.png"></label>
+            <button type="button" onclick="goToNextStep(2)">Next</button>
+          </div>
+
+          <div class="education-section" id="step2" style="display: none;">
+            <h3>Intermediate / Diploma</h3>
+            <label>Institution Name: <input type="text"></label>
+            <label>Board Name: <input type="text"></label>
+            <label>Specialization: <input type="text"></label>
+            <label>City: <input type="text"></label>
+            <label>State: <input type="text"></label>
+            <label>Year of Completion: <input type="number"></label>
+            <label>Percentage: <input type="number" step="0.01"></label>
+            <label>Upload Certificate: <input type="file" accept=".pdf,.jpg,.jpeg,.png"></label>
+            <button type="button" onclick="goToPreviousStep(1)">Back</button>
+            <button type="button" onclick="goToNextStep(3)">Next</button>
+          </div>
+
+          <div class="education-section" id="step3" style="display: none;">
+            <h3>Undergraduate (UG)</h3>
+            <label>Degree: <input type="text"></label>
+            <label>Specialization: <input type="text"></label>
+            <label>City: <input type="text"></label>
+            <label>State: <input type="text"></label>
+            <label>Year of Completion: <input type="number"></label>
+            <label>University: <input type="text"></label>
+            <label>Institution Type:
+              <select>
+                <option value="">Select</option>
+                <option value="Govt">Government</option>
+                <option value="Private">Private</option>
+                <option value="Deemed">Deemed</option>
+              </select>
+            </label>
+            <label>Upload Certificate: <input type="file" accept=".pdf,.jpg,.jpeg,.png"></label>
+            <button type="button" onclick="goToPreviousStep(1)">Back</button>
+            <button type="button" onclick="goToNextStep(4)">Next</button>
+          </div>
+
+          <div class="education-section" id="step4" style="display: none;">
+            <h3>Postgraduate (PG)</h3>
+            <label>Degree: <input type="text"></label>
+            <label>Specialization: <input type="text"></label>
+            <label>City: <input type="text"></label>
+            <label>State: <input type="text"></label>
+            <label>Year of Completion: <input type="number"></label>
+            <label>University: <input type="text"></label>
+            <label>Institution Type:
+              <select>
+                <option value="">Select</option>
+                <option value="Govt">Government</option>
+                <option value="Private">Private</option>
+                <option value="Deemed">Deemed</option>
+              </select>
+            </label>
+            <label>Upload Certificate: <input type="file" accept=".pdf,.jpg,.jpeg,.png"></label>
+            <button type="button" onclick="goToPreviousStep(1)">Back</button>
+            <button type="button" onclick="goToNextStep(5)">Next</button>
+          </div>
+
+          <div class="education-section" id="step5" style="display: none;">
+            <h3>PhD</h3>
+            <label>Have you completed PG?
+              <select onchange="togglePgInPhd(this.value)">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </label>
+            <div id="phdPgFields" style="display: none;">
+              <label>Degree: <input type="text"></label>
+              <label>Specialization: <input type="text"></label>
+              <label>Year of Completion: <input type="number"></label>
+              <label>University: <input type="text"></label>
+              <label>Upload Certificate: <input type="file" accept=".pdf,.jpg,.jpeg,.png"></label>
+              <button type="button" onclick="goToPreviousStep(1)">Back</button>
+              <button type="button" onclick="goToNextStep(5)">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+<div class="form-buttons" id="formButtons">
+  <button type="button" id="nextSaveButton" onclick="goToNextTab()">Next & Save</button>
+  <button type="submit" id="submitButton" style="display: none;">Submit</button>
+  <button type="button" onclick="hideForm()">Cancel</button>
+</div>
+
+
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
